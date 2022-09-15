@@ -153,8 +153,17 @@ def recursive_generate(nested):
 
 print(list(recursive_generate([[[1], 2], 3, 4, [5, [6, 7]], 8])))
 
+
 # 八皇后
 def conflict(state, nextX):
+    """
+    函数conflict接受（用状态元组表示的）既有皇后的位置，并确定下一个皇后的位置是否会导致冲突
+    参数nextX表示下一个皇后的水平位置（x坐标，即列），而nextY为下一个皇后的垂直位置（y坐标，即行）。这个函数对既有的每个皇后执行简单的检查：
+    如果下一个皇后与当前皇后的x坐标相同或在同一条对角线上，将发生冲突，因此返回True；如果没有发生冲突，就返回False
+    :param state:
+    :param nextX:
+    :return:
+    """
     nextY = len(state)
     for i in range(nextY):
         if abs(state[i] - nextX) in (0, nextY - i):
@@ -163,6 +172,13 @@ def conflict(state, nextX):
 
 
 def queens(num=8, state=()):
+    """
+    基线条件：最后一个皇后。对于这个皇后，你想如何处理呢？假设你想找出所有可能的解——给定其他皇后的位置，可将这个皇后放在什么位置（可能什么位置都不行）
+    这段代码的意思是，如果只剩下最后一个皇后没有放好，就遍历所有可能的位置，并返回那些不会引发冲突的位置。参数num为皇后总数，而参数state是一个元组，包含已放好的皇后的位置
+    :param num:
+    :param state:
+    :return:
+    """
     for pos in range(num):
         if not conflict(state, pos):
             if len(state) == num - 1:
@@ -173,6 +189,11 @@ def queens(num=8, state=()):
 
 
 def prettyprint(solution):
+    """
+    输出更容易理解些。在任何情况下，清晰的输出都是好事，因为这让查找bug等工作更容易
+    :param solution:
+    :return:
+    """
     def line(pos, length=len(solution)):
         return '. ' * (pos) + 'X ' + '. ' * (length - pos - 1)
 
