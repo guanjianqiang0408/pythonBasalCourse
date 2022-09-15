@@ -90,6 +90,28 @@ print(result)
 print(hasattr(f, "filter"))
 print(hasattr(f, "talk"))
 
-# 抽象基类
 
-# todo
+# 抽象基类
+from abc import ABC, abstractmethod
+
+
+class Talker(ABC):
+    @abstractmethod
+    def talk(self):
+        """
+        子类继承抽象父类，必须重写方法
+        :return:
+        """
+        pass
+
+
+class Knigger(Talker):
+    """
+    如果子类继承抽象基类，没有重写抽象方法，会如下错误：
+    TypeError: Can't instantiate abstract class Knigger with abstract method talk
+    """
+    def talk(self):
+        pass
+
+
+k = Knigger()
