@@ -11,4 +11,7 @@ f.close()
 
 # 文件的上下文管理器,使用上下文管理器，不再需要手动关闭文件
 with open("./test.txt") as f:
+    # 读取一行文件内容， 如果逐行读取文件内容请使用readlines
     print(f.readline())
+
+# seek跳转文件行数读取文件内容
